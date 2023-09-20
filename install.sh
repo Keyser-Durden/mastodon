@@ -74,11 +74,41 @@ sudo apt -y install yarn
 # snap info node
 # snap info npm
 
+# Install packages (perhaps separate into own file)
+sudo apt install redis-server optipng pngquant jhead jpegoptim gifsicle nodejs imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file g++ libprotobuf-dev protobuf-compiler pkg-config gcc autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev libidn11-dev libicu-dev libjemalloc-dev
+
+# install dependency packages for Mastodon
+sudo -u mastodon bundle config deployment 'true'
+sudo -u mastodon bundle config without 'development test'
+sudo -u mastodon bundle install -j$(getconf _NPROCESSORS_ONLN)
+
+# run setup 
+sudo -u mastodon RAILS_ENV=production bundle exec rake mastodon:setup
+
+# Expect : fill out 
+echo before comment
+: <<'END'
+
+    Domain name: Choose a domain name to use for your Mastodon instance. For example, I use social.linuxbabe.com.
+    Enable single user mode: If you want visitors to be able to register on your Mastodon instance, then don’t enable single user mode.
+    Are you using Docker to run Mastodon: No.
+    PostgreSQL host: 127.0.0.1
+    PostgreSQL port: 5432
+    PostgreSQL database: mastodon
+    PostgreSQL user: mastodon
+    PostgreSQL user password: enter the password for the mastodon user which is created in step 1.
+    Redis host: 127.0.0.1
+    Redis port: 6379
+    Redis password: Just press Enter, because there’s no password for Redis.
+    Do you want to store uploaded files on the cloud? If you want to store user-uploaded files in S3 object storage, then you can choose Yes. I just want to store files on my own server, so I choose No.
+    Do you want to send emails from localhost? If this is your mail server, or you have set up an SMTP relay, then you can choose Yes. If you choose No, then you need to enter your SMTP server login credentials.
+    E-mail address to send e-mails “from”: You can press Enter to use the default sender email address.
+    Send a test e-mail with this configuration right now? Choose Yes to send a test email.
+    Send test e-mail to: Enter the test email address.
+    Save configuration? Choose Yes.
+    
+END
+echo after comment
 
 
 
-
-
-
-# Install Node.js's Package Manager , Yarn
-npm install --global yarn
