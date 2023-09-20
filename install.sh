@@ -110,5 +110,55 @@ echo before comment
 END
 echo after comment
 
+#  Prepare the database now? y
+# Compile the assets now? (Y/n) y
+# If Mastodon fails to compile, you should upgrade the server to 2 CPU cores and 3G RAM
+
+# Run this Rails as mastodon user
+sudo -u mastodon RAILS_ENV=production bundle exec rake mastodon:setup
+
+# Create UI admin user
+    # Do you want to create an admin user straight away? Yes
+    # Username: super_admin
+    # E-mail: xiao@linuxbabe.com
+    # You can login with the password: <it will output password here. Save it>
+
+# Setup Mastodon systemd template
+sudo cp /var/www/mastodon/dist/mastodon*.service /etc/systemd/system/
+
+# Edit service file
+sudo sed -i 's/home\/mastodon\/live/var\/www\/mastodon/g' /etc/systemd/system/mastodon-*.service
+
+# Change /home/mastodon/.rbenv/shims/bundle to /usr/local/bin/bundle.
+sudo sed -i 's/home\/mastodon\/.rbenv\/shims/usr\/local\/bin/g' /etc/systemd/system/mastodon-*.service
+
+# Reload systemd for the changes to take effect
+sudo systemctl daemon-reload
+
+# Enable and start mastodon
+sudo systemctl enable --now mastodon-web mastodon-sidekiq mastodon-streaming
+
+# Make sure they are all in active (running)
+sudo systemctl status mastodon-web mastodon-sidekiq mastodon-streaming
+
+# Check if mastodon is running on port 3k (wait a few seconds after running the above command)
+sudo ss -lnpt | grep 3000
+
+# Configure Nginx Reverse Proxy
+sudo apt install nginx
+sudo mkdir -p /var/nginx/cache/
+sudo cp /var/www/mastodon/dist/nginx.conf /etc/nginx/sites-available/mastodon.conf
+# sed for hostname and replace
+# Sed for root and replace
+    # find : root /home/mastodon/live/public;
+    # Replace with : root /var/www/mastodon/public;
+# generate certs with lets encrypt. Update nginx conf file
+# test config
+sudo nginx -t
+# Reload config
+systemctl reload nginx
+
+Should be able to hit the site Now
+
 
 
