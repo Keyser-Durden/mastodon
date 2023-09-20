@@ -28,7 +28,34 @@ sudo -u postgres -i psql
 # ALTER DATABASE mastodon OWNER TO mastodon;
 # \q
 
+# Install Ruby 2.7+.
+sudo apt install ruby ruby-dev
+ruby -v 
 
+# Create the mastodon user
+sudo adduser mastodon --system --group --disabled-login
 
+# Install Git
+sudo apt install git
+
+# Create www dir if not exist
+sudo mkdir -p /var/www/
+
+# Move the mastodon directory to /var/www/.
+sudo mv mastodon/ /var/www/
+
+# Change the owner to mastodon
+sudo chown mastodon:mastodon /var/www/mastodon/ -R
+
+# Get mastodon software
+cd /var/www/mastodon/
+sudo -u mastodon git checkout v4.0.2
+
+# Install bundler: the Ruby dependency manager
+sudo gem install bundler
+
+# Install Node.js v16 (NOT compatible with Node.js v18 or v19)
+# https://github.com/nodejs/snap
+sudo snap install node --classic --channel=16
 
 
