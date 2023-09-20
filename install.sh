@@ -58,4 +58,21 @@ sudo gem install bundler
 # https://github.com/nodejs/snap
 sudo snap install node --classic --channel=16
 
+# Install "npm" (not sure if it is already) : maybe use snap if needs to match node version
+apt install npm
 
+# Install Yarn
+npm install --global yarn
+
+# If need to lookup a snap version
+# snap info node
+# snap info npm
+
+
+
+
+
+
+
+# Install Node.js's Package Manager , Yarn
+npm install --global yarn
