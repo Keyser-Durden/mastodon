@@ -1,7 +1,7 @@
 #!/bin/bash
 source settings.conf
 
-# Add the upstream repository.
+# Add the upstream repository. Maybe substitute with a snap for official support.
 echo "deb [signed-by=/etc/apt/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 
 # Import the PostgreSQL public key.
@@ -61,8 +61,14 @@ sudo snap install node --classic --channel=16
 # Install "npm" (not sure if it is already) : maybe use snap if needs to match node version
 apt install npm
 
-# Install Yarn
+# Install Yarn (method 1)
 npm install --global yarn
+
+# Install Yarn (method 2)
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+sudo apt update
+sudo apt -y install yarn
 
 # If need to lookup a snap version
 # snap info node
