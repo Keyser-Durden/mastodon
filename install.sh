@@ -158,7 +158,8 @@ sudo nginx -t
 # Reload config
 systemctl reload nginx
 
-Should be able to hit the site Now
+# Should be able to hit the site Now
+
 
 
 
