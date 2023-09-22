@@ -1,1 +1,7 @@
+#!/bin/bash
+source settings.conf
 
+cd $code_path
+cp $code_path/mastodon/settings.conf $code_path/
+rm -f $code_path/mastodon
+git $git_url
