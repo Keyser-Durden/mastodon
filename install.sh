@@ -1,6 +1,9 @@
 #!/bin/bash
 source settings.conf
 
+# Add mastodon user
+useradd -m $os_username -s /bin/bash $mastodon_user
+
 # Add the upstream repository. Maybe substitute with a snap for official support.
 echo "deb [signed-by=/etc/apt/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 
