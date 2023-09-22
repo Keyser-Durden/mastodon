@@ -1,2 +1,3 @@
 /bin/bash
-git rebase main
+git checkout
+git pull
