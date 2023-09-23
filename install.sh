@@ -36,8 +36,11 @@ setup_db() {
     cp "$pg_hba_file" "$backup_file"
   fi
 
-# INSERT CODE HERE TO DELETE OFFENDING LINE
-# INSERT CODE HERE TO ADD NEW LINE
+# Delete the specific line matching the pattern (e.g., allowing local connections without a password)
+  sed -i '/local\s\+all\s\+all\s\+127.0.0.1\/32\s\+trust/d' "$pg_hba_file"
+
+# Add a new line to allow root to access without a password (replace with the desired line)
+echo "local all postgres trust" >> "$pg_hba_file"
   
   # Read the contents of the file and replace variables with values
   while IFS= read -r line; do
