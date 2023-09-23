@@ -10,13 +10,11 @@ while IFS= read -r snap_line; do
 done < snaps.list
 
 # Install Packages
+export DEBIAN_FRONTEND=noninteractive
 apt update
-apt -y upgrade
-apt -y autoremove
-
-exit 1
-
+apt upgrade
 cat packages.list | xargs apt-get install -y
+unset DEBIAN_FRONTEND
 
 exit 1
 
