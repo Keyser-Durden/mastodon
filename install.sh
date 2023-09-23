@@ -37,10 +37,10 @@ setup_db() {
   fi
 
 # Delete the specific line matching the pattern (e.g., allowing local connections without a password)
-  sed -i '/local\s\+all\s\+all\s\+127.0.0.1\/32\s\+trust/d' "$pg_hba_file"
+#  sed -i '/local\s\+all\s\+all\s\+127.0.0.1\/32\s\+trust/d' "$pg_hba_file"
 
 # Add a new line to allow root to access without a password (replace with the desired line)
-echo "local all postgres trust" >> "$pg_hba_file"
+#echo "local all postgres trust" >> "$pg_hba_file"
 
 systemctl reload postgresql
   
@@ -50,7 +50,7 @@ systemctl reload postgresql
     eval "line=\"$line\""
     echo "$line"
     # Run the SQL command against the database
-    psql -h "$db_host" -p "$db_port" -c "$line"
+    psql -u postgres -h "$db_host" -p "$db_port" -c "$line"
   done < psql.list
 
   systemctl reload postgresql
