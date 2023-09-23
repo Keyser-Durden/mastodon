@@ -32,14 +32,14 @@ sudo -u postgres -i psql
 # \q
 
 # Install Ruby 2.7+.
-sudo apt install ruby ruby-dev
+sudo apt install -y ruby ruby-dev
 ruby -v 
 
 # Create the mastodon user
 sudo adduser mastodon --system --group --disabled-login
 
 # Install Git
-sudo apt install git
+sudo apt install -y git
 
 # Create www dir if not exist
 sudo mkdir -p /var/www/
@@ -62,7 +62,7 @@ sudo gem install bundler
 sudo snap install node --classic --channel=16
 
 # Install "npm" (not sure if it is already) : maybe use snap if needs to match node version
-apt install npm
+apt install -y npm
 
 # Install Yarn (method 1)
 npm install --global yarn
@@ -78,7 +78,7 @@ sudo apt -y install yarn
 # snap info npm
 
 # Install packages (perhaps separate into own file)
-sudo apt install redis-server optipng pngquant jhead jpegoptim gifsicle nodejs imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file g++ libprotobuf-dev protobuf-compiler pkg-config gcc autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev libidn11-dev libicu-dev libjemalloc-dev
+sudo apt install -y redis-server optipng pngquant jhead jpegoptim gifsicle nodejs imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file g++ libprotobuf-dev protobuf-compiler pkg-config gcc autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev libidn11-dev libicu-dev libjemalloc-dev
 
 # install dependency packages for Mastodon
 sudo -u mastodon bundle config deployment 'true'
@@ -148,7 +148,7 @@ sudo systemctl status mastodon-web mastodon-sidekiq mastodon-streaming
 sudo ss -lnpt | grep 3000
 
 # Configure Nginx Reverse Proxy
-sudo apt install nginx
+sudo apt -y install nginx
 sudo mkdir -p /var/nginx/cache/
 sudo cp /var/www/mastodon/dist/nginx.conf /etc/nginx/sites-available/mastodon.conf
 # sed for hostname and replace
