@@ -26,18 +26,8 @@ useradd -m -s /usr/sbin/nologin $os_username
 sudo apt install -y postgresql postgresql-contrib
 
 setup_db() {
-  # Use sed to replace placeholders with actual values
-  sed -i "s/{db_name}/$db_name/g" psql.list
-  sed -i "s/{os_username}/$os_username/g" psql.list
-  sed -i "s/{db_password}/$db_password/g" psql.list
-
-  # Execute the PostgreSQL commands
-  sudo -u postgres psql -a -f psql.list || { echo "Error executing SQL commands"; exit 1; }
-
-  # Restore the psql.list file with placeholders
-  sed -i "s/$db_name/{db_name}/g" psql.list
-  sed -i "s/$os_username/{os_username}/g" psql.list
-  sed -i "s/'$db_password'/{db_password}/g" psql.list
+psql_script=$(tr -d '\n' < psql.list)
+echo $psql_script
 }
 
 setup_db
