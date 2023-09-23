@@ -18,7 +18,7 @@ sudo apt install -y postgresql postgresql-contrib
 # Check that the postgress is opening the port on localhost
 sudo ss -lnpt | grep postgres
 
-# Start postgres if it is not running
+# Start postgres if it is not running (need to add "enable")
 sudo systemctl start postgresql
 
 # Become postgresql user and setup database
