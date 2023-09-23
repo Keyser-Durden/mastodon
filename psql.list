@@ -1,6 +1,6 @@
 CREATE DATABASE $db_name;
-CREATE USER mastodon;
-ALTER USER mastodon WITH ENCRYPTED PASSWORD '$db_password';
-ALTER USER mastodon createdb;
-ALTER DATABASE mastodon OWNER TO mastodon;
+CREATE USER $os_username;
+ALTER USER $os_username WITH ENCRYPTED PASSWORD '$db_password';
+ALTER USER $os_username createdb;
+ALTER DATABASE $db_name OWNER TO $os_username;
 \q
