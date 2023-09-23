@@ -8,6 +8,7 @@ while IFS= read -r snap_line; do
     fi
 done < snaps.list
         
+exit 1
 
 # Install Packages
 cat packages.list | xargs apt-get install -y
