@@ -36,6 +36,19 @@ useradd -m -s /usr/sbin/nologin $os_username
 # Start postgres if it is not running (need to add "enable")
 # sudo systemctl start postgresql
 
+commands=()
+
+while IFS= read -r cmd; do
+    commands+=("$cmd")
+done < "psql.list"
+
+for cmd in "${commands[@]}"; do
+    sudo -u postgres psql -c "$cmd"
+done
+
+
+exit 1
+
 # Become postgresql user and setup database
 sudo -u postgres -i psql
 # This should be done via cmdline from inside psql
