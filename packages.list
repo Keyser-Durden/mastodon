@@ -1,7 +1,5 @@
 postgresql
 postgresql-contrib
-ruby
-ruby-dev
 git
 npm
 redis-server 
