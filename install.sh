@@ -1,6 +1,8 @@
 #!/bin/bash
 source settings.conf
 
+cat package.list | xargs apt-get install -y
+
 # Add mastodon user
 useradd -m -s /usr/sbin/nologin $os_username
 
