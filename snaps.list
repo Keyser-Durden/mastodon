@@ -1,2 +1,2 @@
-ruby --channel=3.2/stable
+ruby --classic --channel=3.2/stable
 node --classic --channel=16
