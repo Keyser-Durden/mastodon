@@ -31,6 +31,11 @@ setup_db() {
   local pg_hba_file="/etc/postgresql/14/main/pg_hba.conf"
   local new_hba_file="$pg_hba_file.bak"
   
+  # Backup the original pg_hba.conf if not already backed up
+  if [ ! -f "$backup_file" ]; then
+    cp "$pg_hba_file" "$backup_file"
+  fi
+  
   # Read the contents of the file and replace variables with values
   while IFS= read -r line; do
     # Substitute variables in the line
