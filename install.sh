@@ -35,6 +35,9 @@ setup_db() {
   if [ ! -f "$backup_file" ]; then
     cp "$pg_hba_file" "$backup_file"
   fi
+
+# INSERT CODE HERE TO DELETE OFFENDING LINE
+# INSERT CODE HERE TO ADD NEW LINE
   
   # Read the contents of the file and replace variables with values
   while IFS= read -r line; do
@@ -44,6 +47,8 @@ setup_db() {
     # Run the SQL command against the database
     psql -h "$db_host" -p "$db_port" -c "$line"
   done < psql.list
+
+  cp -f $new_hba_file $pg_hba_file
 }
 
 setup_db
