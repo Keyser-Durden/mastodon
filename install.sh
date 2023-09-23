@@ -32,7 +32,7 @@ useradd -m -s /usr/sbin/nologin $os_username
 
 # Update repository index and install PostgreSQL.
 #sudo apt update
-#sudo apt install -y postgresql postgresql-contrib
+sudo apt install -y postgresql postgresql-contrib
 
 # Check that the postgress is opening the port on localhost
 # sudo ss -lnpt | grep postgres
