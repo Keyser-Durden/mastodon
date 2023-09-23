@@ -23,32 +23,17 @@ unset DEBIAN_FRONTEND
 # Add mastodon user
 useradd -m -s /usr/sbin/nologin $os_username
 
-# Add the upstream repository. Maybe substitute with a snap for official support.
-#echo "deb [signed-by=/etc/apt/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-
-# Import the PostgreSQL public key.
-#sudo mkdir -p /etc/apt/keyrings/
-#wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/keyrings/postgresql.asc
-
-# Update repository index and install PostgreSQL.
-#sudo apt update
 sudo apt install -y postgresql postgresql-contrib
 
-# Check that the postgress is opening the port on localhost
-# sudo ss -lnpt | grep postgres
-
-# Start postgres if it is not running (need to add "enable")
-# sudo systemctl start postgresql
-
 setup_db() {
-# Read the SQL commands from psql.list and perform variable substitution
-while IFS= read -r cmd; do
-    # Substitute variables in the command using envsubst
-    cmd=$(echo "$cmd" | envsubst)
+  # Read the SQL commands from psql.list and perform variable substitution
+  while IFS= read -r cmd; do
+      # Substitute variables in the command using envsubst
+      cmd=$(echo "$cmd" | envsubst)
 
-    # Execute the PostgreSQL command
-    sudo -u postgres psql -c "$cmd"
-done < "psql.list"
+      # Execute the PostgreSQL command
+      sudo -u postgres psql -c "$cmd" || { echo "Error executing command: $cmd"; exit 1; }
+  done < psql.list
 }
 
 setup_db
