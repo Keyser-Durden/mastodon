@@ -1,6 +1,15 @@
 #!/bin/bash
 source settings.conf
 
+# Instal snaps
+while IFS= read -r snap_line; do
+    if [ -n "snap_line" ]; then
+        snap install $snap_line
+    fi
+done < snaps.list
+        
+
+# Install Packages
 cat packages.list | xargs apt-get install -y
 
 # Add mastodon user
