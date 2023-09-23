@@ -1,6 +1,7 @@
 #!/bin/bash
 source settings.conf
 
+install_snaps() {
 echo "### Installing Snaps ###"
 # Instal snaps
 while IFS= read -r snap_line; do
@@ -8,6 +9,7 @@ while IFS= read -r snap_line; do
         snap install $snap_line
     fi
 done < snaps.list
+}
 
 # Install Packages
 export DEBIAN_FRONTEND=noninteractive
