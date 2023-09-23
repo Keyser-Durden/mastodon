@@ -27,6 +27,10 @@ sudo apt install -y postgresql postgresql-contrib
 
 
 setup_db() {
+  # modify psql conf file to allow root to access w/o password
+  local pg_hba_file="/etc/postgresql/14/main/pg_hba.conf"
+  local new_hba_file="$pg_hba_file.bak"
+  
   # Read the contents of the file and replace variables with values
   while IFS= read -r line; do
     # Substitute variables in the line
