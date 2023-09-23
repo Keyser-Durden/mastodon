@@ -40,15 +40,18 @@ sudo apt install -y postgresql postgresql-contrib
 # Start postgres if it is not running (need to add "enable")
 # sudo systemctl start postgresql
 
-commands=()
-
+setup_db() {
+# Read the SQL commands from psql.list and perform variable substitution
 while IFS= read -r cmd; do
-    commands+=("$cmd")
-done < "psql.list"
+    # Substitute variables in the command using envsubst
+    cmd=$(echo "$cmd" | envsubst)
 
-for cmd in "${commands[@]}"; do
+    # Execute the PostgreSQL command
     sudo -u postgres psql -c "$cmd"
-done
+done < "$psql_list_file"
+}
+
+setup_db
 
 
 exit 1
