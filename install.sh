@@ -12,7 +12,7 @@ done < snaps.list
 # Install Packages
 export DEBIAN_FRONTEND=noninteractive
 apt update
-apt upgrade
+apt -y upgrade
 cat packages.list | xargs apt-get install -y
 unset DEBIAN_FRONTEND
 
