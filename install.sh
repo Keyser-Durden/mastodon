@@ -33,7 +33,7 @@ setup_db() {
   
   # Backup the original pg_hba.conf if not already backed up
   if [ ! -f "$backup_file" ]; then
-    cp "$pg_hba_file" "$backup_file"
+    cp "$pg_hba_file" "$new_hba_file"
   fi
 
 # Delete the specific line matching the pattern (e.g., allowing local connections without a password)
