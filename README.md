@@ -1,7 +1,7 @@
 # mastodon
 
 
-Package versinos tested
+Package versions tested
 
 PostgreSQL 14-238
 
