@@ -32,9 +32,9 @@ setup_db() {
   #local new_hba_file="$pg_hba_file.bak"
  
 # Backup the original pg_hba.conf if not already backed up
-  if [ ! -f "$backup_file" ]; then
-    cp "$pg_hba_file" "$new_hba_file"
-  fi
+  #if [ ! -f "$backup_file" ]; then
+   # cp "$pg_hba_file" "$new_hba_file"
+  #fi
   
 #cat $new_hba_file | sed '/postgres/s/peer/trust/g' > $pg_hba_file
 
