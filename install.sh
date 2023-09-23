@@ -50,7 +50,7 @@ setup_db() {
     echo "$line"
     # Run the SQL command against the database
     psql -h "$db_host" -p "$db_port" -c "$line"
-  done < /path/to/psql.list
+  done < psql.list
 EOF
 
   #systemctl reload postgresql
