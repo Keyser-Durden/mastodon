@@ -36,21 +36,22 @@ setup_db() {
     cp "$pg_hba_file" "$new_hba_file"
   fi
   
-cat $new_hba_file | sed '/postgres/s/peer/trust/g' > $pg_hba_file
+#cat $new_hba_file | sed '/postgres/s/peer/trust/g' > $pg_hba_file
 
 # Add a new line to allow root to access without a password (replace with the desired line)
 #echo "local all postgres trust" >> "$pg_hba_file"
 
 systemctl reload postgresql
   
-  # Read the contents of the file and replace variables with values
+  sudo -u postgres bash <<EOF
   while IFS= read -r line; do
     # Substitute variables in the line
     eval "line=\"$line\""
     echo "$line"
     # Run the SQL command against the database
-    psql -U postgres -h "$db_host" -p "$db_port" -c "$line"
-  done < psql.list
+    psql -h "$db_host" -p "$db_port" -c "$line"
+  done < /path/to/psql.list
+EOF
 
   #systemctl reload postgresql
   #cp -f $new_hba_file $pg_hba_file
