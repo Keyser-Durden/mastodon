@@ -12,11 +12,9 @@ done < snaps.list
 # Install Packages
 export DEBIAN_FRONTEND=noninteractive
 apt update
-apt -y upgrade
+# apt -y upgrade
 cat packages.list | xargs apt-get install -y
 unset DEBIAN_FRONTEND
-
-exit 1
 
 # Add mastodon user
 useradd -m -s /usr/sbin/nologin $os_username
@@ -33,10 +31,10 @@ useradd -m -s /usr/sbin/nologin $os_username
 #sudo apt install -y postgresql postgresql-contrib
 
 # Check that the postgress is opening the port on localhost
-sudo ss -lnpt | grep postgres
+# sudo ss -lnpt | grep postgres
 
 # Start postgres if it is not running (need to add "enable")
-sudo systemctl start postgresql
+# sudo systemctl start postgresql
 
 # Become postgresql user and setup database
 sudo -u postgres -i psql
