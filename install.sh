@@ -42,7 +42,7 @@ setup_db() {
 # Add a new line to allow root to access without a password (replace with the desired line)
 #echo "local all postgres trust" >> "$pg_hba_file"
 
-systemctl reload postgresql
+#systemctl reload postgresql
   
   # Read the contents of the file and replace variables with values
   while IFS= read -r line; do
@@ -50,11 +50,11 @@ systemctl reload postgresql
     eval "line=\"$line\""
     echo "$line"
     # Run the SQL command against the database
-    psql -u postgres -h "$db_host" -p "$db_port" -c "$line"
+    psql -U postgres -h "$db_host" -p "$db_port" -c "$line"
   done < psql.list
 
-  systemctl reload postgresql
-  cp -f $new_hba_file $pg_hba_file
+  #systemctl reload postgresql
+  #cp -f $new_hba_file $pg_hba_file
 }
 
 setup_db
