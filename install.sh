@@ -48,7 +48,7 @@ while IFS= read -r cmd; do
 
     # Execute the PostgreSQL command
     sudo -u postgres psql -c "$cmd"
-done < "$psql_list_file"
+done < "psql.list"
 }
 
 setup_db
