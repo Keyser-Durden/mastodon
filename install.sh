@@ -28,8 +28,8 @@ sudo apt install -y postgresql postgresql-contrib
 
 setup_db() {
   # modify psql conf file to allow root to access w/o password
-  local pg_hba_file="/etc/postgresql/14/main/pg_hba.conf"
-  local new_hba_file="$pg_hba_file.bak"
+  #local pg_hba_file="/etc/postgresql/14/main/pg_hba.conf"
+  #local new_hba_file="$pg_hba_file.bak"
  
 # Backup the original pg_hba.conf if not already backed up
   if [ ! -f "$backup_file" ]; then
@@ -41,7 +41,7 @@ setup_db() {
 # Add a new line to allow root to access without a password (replace with the desired line)
 #echo "local all postgres trust" >> "$pg_hba_file"
 
-systemctl reload postgresql
+#systemctl reload postgresql
   
   sudo -u postgres bash <<EOF
   while IFS= read -r line; do
