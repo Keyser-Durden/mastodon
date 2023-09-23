@@ -49,7 +49,7 @@ setup_db() {
     eval "line=\"$line\""
     echo "$line"
     # Run the SQL command against the database
-    psql -h "$db_host" -p "$db_port" -c "$line"
+    psql -h "$db_host" -p "$db_port" -U postgres -c "$line"
   done < psql.list
 EOF
 
