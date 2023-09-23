@@ -1,17 +1,18 @@
 #!/bin/bash
 source settings.conf
 
+echo "### Installing Snaps ###"
 # Instal snaps
 while IFS= read -r snap_line; do
     if [ -n "snap_line" ]; then
         snap install $snap_line
     fi
 done < snaps.list
-        
-exit 1
 
 # Install Packages
 cat packages.list | xargs apt-get install -y
+
+exit 1
 
 # Add mastodon user
 useradd -m -s /usr/sbin/nologin $os_username
