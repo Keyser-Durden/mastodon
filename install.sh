@@ -11,12 +11,14 @@ while IFS= read -r snap_line; do
 done < snaps.list
 }
 
+install_packages() {
 # Install Packages
 export DEBIAN_FRONTEND=noninteractive
 apt update
 # apt -y upgrade
 cat packages.list | xargs apt-get install -y
 unset DEBIAN_FRONTEND
+}
 
 # Add mastodon user
 useradd -m -s /usr/sbin/nologin $os_username
