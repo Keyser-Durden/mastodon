@@ -1,0 +1,5 @@
+"CREATE USER mastodon;"
+"ALTER USER mastodon WITH ENCRYPTED PASSWORD '$db_password';"
+"ALTER USER mastodon createdb;"
+"ALTER DATABASE mastodon OWNER TO mastodon;"
+"\q"
