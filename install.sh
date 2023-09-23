@@ -25,11 +25,16 @@ useradd -m -s /usr/sbin/nologin $os_username
 
 sudo apt install -y postgresql postgresql-contrib
 
+
 setup_db() {
-# Read the contents of the file and replace variables with values
-while IFS= read -r line; do
-  eval "echo \"$line\""
-done < psql.list
+  # Read the contents of the file and replace variables with values
+  while IFS= read -r line; do
+    # Substitute variables in the line
+    eval "line=\"$line\""
+    echo "$line"
+    # Run the SQL command against the database
+    sudo -u postgres -i psql -h "$db_host" -p "$db_port" -c "$line"
+  done < psql.list
 }
 
 setup_db
