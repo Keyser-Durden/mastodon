@@ -10,6 +10,12 @@ while IFS= read -r snap_line; do
 done < snaps.list
 
 # Install Packages
+apt update
+apt -y upgrade
+apt -y autoremove
+
+exit 1
+
 cat packages.list | xargs apt-get install -y
 
 exit 1
