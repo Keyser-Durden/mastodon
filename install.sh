@@ -68,10 +68,10 @@ apt install -y npm
 npm install --global yarn
 
 # Install Yarn (method 2)
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-sudo apt update
-sudo apt -y install yarn
+#echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+#curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+#sudo apt update
+#sudo apt -y install yarn
 
 # If need to lookup a snap version
 # snap info node
